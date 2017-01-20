@@ -4,7 +4,9 @@ var express = require('express'),
     app     = express(),
     eps     = require('ejs'),
     morgan  = require('morgan');
-    
+
+var ServerRoutes = require('./server/routes');
+
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
@@ -58,7 +60,8 @@ var initDb = function(callback) {
   });
 };
 
-app.get('/', function (req, res) {
+ServerRoutes(app);
+/*app.get('/', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
   if (!db) {
@@ -89,7 +92,7 @@ app.get('/pagecount', function (req, res) {
   } else {
     res.send('{ pageCount: -1 }');
   }
-});
+});*/
 
 // error handling
 app.use(function(err, req, res, next){
